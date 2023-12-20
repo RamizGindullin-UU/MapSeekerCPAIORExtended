@@ -4,27 +4,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>README0.md</title>
+  <title>readme.md</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h2 id="data-generation">Data generation</h2>
+  <div class="stackedit__html"><hr>
+<h2 id="instruction-on-how-to-generate-the-dictionary-of-anti-rewriting-rules">Instruction on how to generate the dictionary of anti-rewriting rules</h2>
+<p>To generate the anti-rewriting rules of Section 6 anew perform these steps:</p>
+<ol>
+<li>In the file <code>constraint_check.pl</code> delete or disable the lines:<br>
+<code>:- use_module(found_condpairs_family1_symf3).</code><br>
+<code>:- use_module(found_condpairs_family2_symf3).</code></li>
+<li>Run SICStus Prolog from the terminal (version 4.6.0 or a more recent version) to generate anti-rewriting rules of Families 1 and 2:<br>
+<code>| ?- [constraint_check.pl], top, halt.</code><br>
+It will take several hours to perform.</li>
+<li>In the file <code>constraint_check.pl</code> restore the lines:<br>
+<code>:- use_module(found_condpairs_family1_symf3).</code><br>
+<code>:- use_module(found_condpairs_family2_symf3).</code></li>
+<li>Run SICStus Prolog from the terminal (version 4.6.0 or a more recent version) to generate anti-rewriting rules of Families 1 and 2:<br>
+<code>| ?- [constraint_check.pl], top(3), halt.</code><br>
+It will take several days to generate the rules.</li>
+</ol>
+<h2 id="data-generation">Data generation</h2>
 <h3 id="instruction-on-how-to-generate-the-data-for-sharp-bounds-of-combinatorial-objects">Instruction on how to generate the data for sharp bounds of combinatorial objects</h3>
-<blockquote>
 <p>The data generation phase is performed in this order:</p>
 <ol>
 <li>the generation of a set of tables associated with each combinatorial object,</li>
 <li>the generation of some metadata for each generated table associated with each combinatorial object,</li>
 <li>the generation of some meta metadata for the metadata of each combinatorial object.</li>
 </ol>
-</blockquote>
 <p>A detailed instruction is this:</p>
 <h3 id="generating-the-data-i.e.-the-tables-for-the-combinatorial-objets-graph-partition-partition0-group-cgroup.">Generating the data, i.e. the tables, for the combinatorial objets graph, partition, partition0, group, cgroup.</h3>
-<blockquote>
 <p>Make sure that, within the directory containing the bound seeker code files, there is a directory called <strong>data</strong>, and make sure that with this <strong>data</strong> directory there are the directories called <strong>graph</strong>, <strong>partition</strong>, <strong>partition0</strong>, <strong>group</strong>, <strong>cgroup</strong>, <strong>tree</strong>, <strong>forest</strong>, and <strong>forest0</strong>.</p>
-</blockquote>
-<blockquote>
 <p>For generating the graph data, i.e. the tables of the graph combinatorial object do:</p>
 <ol>
 <li>Check that within the <strong>/data/graph</strong> directory we have the empty directories <strong>data2, data3, … , data26.</strong></li>
@@ -33,16 +45,10 @@
 <li>Type the goal <code>top(graph, 26, 1).</code>,</li>
 <li>Type <code>halt.</code> to exit SICStus Prolog.</li>
 </ol>
-</blockquote>
-<blockquote>
 <p>Proceed in a similar way to generate the tables of the <em>partition</em>, <em>partition0</em>, <em>group</em>, and <em>cgroup</em> combinatorial objects, by respectively replacing <code>graph</code> by <code>partition</code>, <code>partition0</code>, <code>group</code>, and <code>cgroup</code>, and<br>
 the constant <code>26</code> by <code>30</code>, <code>30</code>,<code>30</code> and <code>30</code>.</p>
-</blockquote>
-<blockquote>
 <p>Note that for the <em>tree</em>, <em>forest</em>, and <em>forest0</em> combinatorial objects, a python code generates the corresponding tables.</p>
-</blockquote>
 <h3 id="generating-the-metadata-associated-with-each-table-of-the-combinatorial-objects-graph-partition-partition0-group-cgroup-tree-forest-and-forest0.">Generating the metadata associated with each table of the combinatorial objects graph, partition, partition0, group, cgroup, tree, forest, and forest0.</h3>
-<blockquote>
 <p>For generating the graph metadata do:</p>
 <ol>
 <li>Open a bash shell and position yourself in the directory containing the files of the bound seeker,</li>
@@ -50,12 +56,8 @@ the constant <code>26</code> by <code>30</code>, <code>30</code>,<code>30</code>
 <li>Type the goal <code>top(graph, 26).</code>,</li>
 <li>Type <code>halt.</code> to exit SICStus Prolog.</li>
 </ol>
-</blockquote>
-<blockquote>
 <p>Proceed in a similar way to generate the metadata of the <em>partition</em>, <em>partition0</em>, <em>group</em>, <em>cgroup</em>, <em>tree</em>, <em>forest</em>, <em>forest0</em> combinatorial objects, by respectively replacing <code>graph</code> by <code>partition</code>, <code>partition0</code>, <code>group</code>, <code>cgroup</code>, <code>tree</code>, <code>forest</code>, <code>forest0</code> and the constant <code>26</code> by <code>30</code>, <code>30</code>, <code>30</code>, <code>30</code>, <code>22</code>, <code>22</code>, and <code>22</code>.</p>
-</blockquote>
 <h3 id="generating-the-meta-metadata-associated-with-each-combinatorial-objets-graph-partition-partition0-group-cgroup-tree-forest-and-forest0.">Generating the meta metadata associated with each combinatorial objets graph, partition, partition0, group, cgroup, tree, forest, and forest0.</h3>
-<blockquote>
 <p>For generating the graph meta metadata do:</p>
 <ol>
 <li>Open a bash shell and position yourself in the directory containing the files of the bound seeker,</li>
@@ -63,54 +65,36 @@ the constant <code>26</code> by <code>30</code>, <code>30</code>,<code>30</code>
 <li>Type the goal <code>top(graph, 26).</code>,</li>
 <li>Type <code>halt.</code> to exit SICStus Prolog.</li>
 </ol>
-</blockquote>
-<blockquote>
 <p>Proceed in a similar way to generate the metadata of the <em>partition</em>, <em>partition0</em>, <em>group</em>, <em>cgroup</em>, <em>tree</em>, <em>forest</em>, <em>forest0</em> combinatorial objects, by respectively replacing <code>graph</code> by <code>partition</code>, <code>partition0</code>, <code>group</code>, <code>cgroup</code>, <code>tree</code>, <code>forest</code>, <code>forest0</code> and the constant <code>26</code> by <code>30</code>, <code>30</code>, <code>30</code>, <code>30</code>, <code>22</code>, <code>22</code>, and <code>22</code>.</p>
-</blockquote>
 <h3 id="how-the-generate-the-forest-forest0-and-tree-objects-used-in-the-experiment-of-decomposition-method">How the generate the forest, forest0 and tree objects used in the experiment of decomposition method</h3>
-<blockquote>
 <p>The files insides this directory are used to generate three combinatorials objects, namely :</p>
-</blockquote>
 <ol>
 <li>forest with isolated vertices noted <em>forest</em></li>
 <li>forest without isolated vertices noted <em>forest0</em></li>
 <li>tree noted <em>tree</em></li>
 </ol>
-<blockquote>
 <p>The goal of thoses scripts is to generate instances (in SICStus prolog format) for three combinatorial objects where one of their characteristics are optimal acccording to their values. As examples of characteristics, we have the greatest depth of a node noted <em>maxp</em>, the number of leaves noted <em>f</em> or the number of nodes noted <em>v</em> and etc…</p>
-</blockquote>
-<blockquote>
 <p>The main method used to generate those objects is a dedicated algorithm of <a href="https://www-cs-faculty.stanford.edu/~knuth/taocp.html">Donald E. Knuth</a> stated Algorithm O (<em>Oriented forest</em>) of his book titled <em>Art of Computer Programming, Volume 4, Fascicle 4, Generating All Trees, History of Combinatorial Generation</em></p>
-</blockquote>
 <h3 id="command-lines-to-generate-the-objects-forest-forest0-and-tree-objects-used-in-the-experiment-of-decomposition-method">Command lines to generate the objects forest, forest0 and tree objects used in the experiment of decomposition method</h3>
 <h4 id="dependencies">Dependencies</h4>
-<blockquote>
 <p>The programs <a href="https://www.python.org/downloads/"><code>python3</code></a> and SICStus Prolog (version 4.6.0 or a more recent version) should be installed.</p>
-</blockquote>
 <h4 id="preparation-for-running-the-files-to-generate-the-combinatorials-objects.">Preparation for running the files to generate the combinatorials objects.</h4>
-<blockquote>
 <p>Upload on your computer the directory  <strong>generate_data_forest_ext_CPAIOR</strong> and its contains avalaible in git repository.</p>
-</blockquote>
 <h3 id="running-the-program-to-generate-the-combinatorial-objects">Running the program to generate the combinatorial objects</h3>
-<blockquote>
 <ol>
 <li>From the terminal  and inside the  directory <strong>generate_data_forest_ext_CPAIOR</strong>   run SICStus Prolog (version 4.6.0 or a more recent version) with the following command to generate appropriate directories for data:<br>
 <code>| ?- [gen_data_directory], gen_directory, halt.</code></li>
-<li>Then to generate the combinatorial object <em>forest</em>, <em>forest0</em>, or <em>tree</em>, you just need  to respectively run in the Terminal from the repository <strong>generate_data_forest_ext_CPAIOR</strong> the scripts below:<br>
-<code>python3 gen_forest.py maximum_size_of_the_combinatorial_object</code><br>
-<code>python3 gen_forest0.py maximum_size_of_the_combinatorial_object</code><br>
-<code>python3 gen_tree.py maximum_size_of_the_combinatorial_object</code></li>
+<li>Then to generate the combinatorial object <em>forest</em>, <em>forest0</em>, or <em>tree</em>, you just need  to respectively run in the Terminal from the repository <strong>generate_data_forest_ext_CPAIOR</strong> the scripts below:</li>
 </ol>
-</blockquote>
+<p><code>python3 gen_forest.py maximum_size_of_the_combinatorial_object</code></p>
+<p><code>python3 gen_forest0.py maximum_size_of_the_combinatorial_object</code></p>
+<p><code>python3 gen_tree.py maximum_size_of_the_combinatorial_object</code></p>
 <h3 id="results-of-running-the-scripts-above">Results of running the scripts above</h3>
-<blockquote>
 <p>After running the scripts above, the generated objects which have extremal values of their caracteristics and no more than <code>maximum_size_of_the_combinatorial_object</code> vertices are stored in the directory named <strong>data_object</strong> where <strong>object</strong> is respectively <strong>forest, forest0</strong>, or <strong>tree</strong>.<br>
 Then you copy those directories <strong>forest, forest0, tree</strong> in the <strong>data</strong> directory of the bound seeker.</p>
-</blockquote>
-<h3 id="instruction-on-how-to-reproduce-the-experiments-executed-on-the-clusters-of--digital-research-alliance-of-canada-to-learn-sharp-bounds-using-model-1-and-model-2">Instruction on how to reproduce the experiments executed on the clusters of  Digital Research Alliance of Canada to learn sharp bounds using Model 1 and Model 2</h3>
+<h2 id="instruction-on-how-to-reproduce-the-experiments-executed-on-the-clusters-of--digital-research-alliance-of-canada-to-learn-sharp-bounds-using-model-1-and-model-2">Instruction on how to reproduce the experiments executed on the clusters of  Digital Research Alliance of Canada to learn sharp bounds using Model 1 and Model 2</h2>
 <p>To reproduce the test performed on the clusters of  Digital Research Alliance of Canada perform the following steps:</p>
 <h4 id="running-the-1rst-version-of-the-acquisition-tool-which--use-model-1">Running the 1rst version of the acquisition tool <strong>which  use</strong> <strong>Model 1</strong></h4>
-<blockquote>
 <ol>
 <li>First upload on the cluster of Digital Research Alliance of Canada the version of Bound Seeker code files <strong>which  use</strong> <strong>Model 1</strong>. The code is at the archive repository.</li>
 <li>Upload the files <code>run_on_cluster.pl, cmds_for_maps.pl</code>  in the same directory that contains the file <code>main.pl</code> of the version of Bound Seeker code files <strong>which  use</strong> <strong>Model 1</strong> and that you previously uploaded on the cluster of Digital Research Alliance of Canada.</li>
@@ -119,25 +103,17 @@ Then record and close the file.</li>
 <li>From the terminal of cluster and inside the same directory of the file <code>main.pl</code>   run SICStus Prolog (version 4.6.0 or a more recent version)  with the following command to launch the experiments:<br>
 <code>| ?- [run_on_cluster], gen_tache('_test_1_poly_cond'), submit_job('_test_1_poly_cond'), halt.</code></li>
 </ol>
-</blockquote>
 <p>After launching the command above, <strong>510  jobs</strong> (a job is to find sharp bounds on a group of data bound table of the same characteristic of the same combinatorial object) to find sharp bounds with  <strong>Model 1</strong> will be launched where the maximum time of running is <strong>4 days</strong>.</p>
-<blockquote>
 <ol start="5">
 <li>After the jobs on clusters are finished, from the terminal of cluster and inside the same directory of the file <code>main.pl</code>  run SICStus Prolog (version 4.6.0 or a more recent version)  with the following command to get the results of the experiments:<br>
 <code>| ?- [run_on_cluster], get_results('_test_1_poly_cond'), halt.</code></li>
 </ol>
-</blockquote>
-<p>When the running of the command above terminates, you can access the results which are the conjectures files in the directory:</p>
-<blockquote>
-<p><strong>data_test_1_poly_cond/name_of_the_combinatorial_object_v_test_1_poly_cond/conjectures_name_of_the_combinatorial_object</strong></p>
-</blockquote>
-<p>And you can access the results which are the formulae of the conjectures in the files</p>
-<blockquote>
-<p><strong>data_test_1_poly_cond/name_of_the_combinatorial_object_v_test_1_poly_cond/results_name_of_the_combinatorial_object.tex</strong></p>
-</blockquote>
+<p>When the running of the command above terminates, you can access the results which are the conjectures files in the directory:<br>
+<strong>data_test_1_poly_cond/name_of_the_combinatorial_object_v_test_1_poly_cond/conjectures_name_of_the_combinatorial_object</strong></p>
+<p>And you can access the results which are the formulae of the conjectures in the files<br>
+<strong>data_test_1_poly_cond/name_of_the_combinatorial_object_v_test_1_poly_cond/results_name_of_the_combinatorial_object.tex</strong></p>
 <p>where <strong>name_of_the_combinatorial_object</strong> is one of the following names of objects : <strong>graph , partition, partition0, group, cgroup, tree, forest, forest0.</strong></p>
 <h4 id="running-the-2nd-version-of-the-acquisition-tool-which-use-which--use-model-2">Running the 2nd version of the acquisition tool which use <strong>which  use</strong> <strong>Model 2</strong></h4>
-<blockquote>
 <ol>
 <li>First upload on the cluster of Digital Research Alliance of Canada the version of Bound Seeker code files <strong>which  use</strong> <strong>Model 2</strong>. The code is at the archive repository.</li>
 <li>Upload the files <code>run_on_cluster.pl, cmds_for_maps.pl</code>  in the same directory that contains the file <code>main.pl</code> of the version of Bound Seeker code files <strong>which  use</strong> <strong>Model 2</strong> and that you previously uploaded on the cluster of Digital Research Alliance of Canada.</li>
@@ -145,25 +121,17 @@ Then record and close the file.</li>
 <li>From the terminal of cluster and inside the same directory of the file <code>main.pl</code>   run SICStus Prolog (version 4.6.0 or a more recent version)  with the following command to launch the experiments:<br>
 <code>| ?- [run_on_cluster], gen_tache('_test_1_tous'), submit_job('_test_1_tous'), halt.</code></li>
 </ol>
-</blockquote>
 <p>After launching the command above, <strong>510  jobs</strong> (a job is to find sharp bounds on a group of data bound table of the same characteristic of the same combinatorial object) to find sharp bounds with  <strong>Model 2</strong> will be launched where the maximum time of running is <strong>4 days.</strong></p>
-<blockquote>
 <ol start="5">
 <li>After the jobs on clusters are finished, from the terminal of cluster and inside the same directory of the file <code>main.pl</code>  run SICStus Prolog (version 4.6.0 or a more recent version)  with the following command to get the results of the experiments:<br>
 <code>| ?- [run_on_cluster], get_results('_test_1_tous'), halt.</code></li>
 </ol>
-</blockquote>
-<p>When the running of the command above terminates, you can access the results which are the conjectures files in the directory:</p>
-<blockquote>
-<p><strong>data_test_1_tous/name_of_the_combinatorial_object_v_test_1_tous/conjectures_name_of_the_combinatorial_object</strong></p>
-</blockquote>
+<p>When the running of the command above terminates, you can access the results which are the conjectures files in the directory:<br>
+<strong>data_test_1_tous/name_of_the_combinatorial_object_v_test_1_tous/conjectures_name_of_the_combinatorial_object</strong></p>
 <p>And you can access the results which are the formulae of the conjectures in the files</p>
-<blockquote>
 <p><strong>data_test_1_tous/name_of_the_combinatorial_object_v_test_1_tous/results_name_of_the_combinatorial_object.tex</strong></p>
-</blockquote>
 <p>where <strong>name_of_the_combinatorial_object</strong> is one of the following names of objects : <strong>graph , partition, partition0, group, cgroup, tree, forest, forest0.</strong></p>
-<h3 id="instruction-on-how-to-reproduce-the-tables-of-the-evaluation-of-the-contribution-of-boolean-arithmetic-equations-to-learn-sharp-bounds">Instruction on how to reproduce the tables of the evaluation of the contribution of Boolean-arithmetic equations to learn sharp bounds</h3>
-<blockquote>
+<h2 id="instruction-on-how-to-reproduce-the-tables-of-the-evaluation-of-the-contribution-of-boolean-arithmetic-equations-to-learn-sharp-bounds">Instruction on how to reproduce the tables of the evaluation of the contribution of Boolean-arithmetic equations to learn sharp bounds</h2>
 <p>To reproduce the test performed in <strong>Section 8.2</strong> perform the following steps :</p>
 <ol>
 <li>First, to avoid an overwriting in the following steps, make sure to duplicate the <strong>/data/</strong> directory which already exists in the archive and contains the data tables for the lower and upper bounds of each combinatorial object of the Bound Seeker.</li>
@@ -178,12 +146,12 @@ Then record and close the file.</li>
 <li>Run SICStus Prolog from the terminal (version 4.6.0 or a more recent version) with the following command to print in the console the <strong>Table 12</strong>:<br>
 <code>| ?− [contribution_test_script], top(cases), halt.</code></li>
 </ol>
-</blockquote>
-<h3 id="instruction-on-how-to-reproduce-the-performance-test-of-the-acquisition-of-boolean-arithmetic-equations">Instruction on how to reproduce the performance test of the acquisition of Boolean-arithmetic equations</h3>
+<h2 id="instruction-on-how-to-reproduce-the-performance-test-of-the-acquisition-of-boolean-arithmetic-equations">Instruction on how to reproduce the performance test of the acquisition of Boolean-arithmetic equations</h2>
 <p>To reproduce the test performed in Section 8.3 perform the following steps:</p>
 <ol>
 <li>
-<p>Put the conjecture files in the <code>existing_maps' directory. Ensure that the conjecture files have the appropriate names. Note that the</code>existing_maps’ directory already exists in the archive and contains the lower and upper bounds of the corresponding bounds generated by the Bound Seeker for each combinatorial object.</p>
+<p>Put the conjecture files in the <strong>existing_maps</strong> directory. Ensure that the conjecture files have the appropriate names.<br>
+Note that the <strong>existing_maps</strong> directory already exists in the archive and contains the lower and upper bounds of the corresponding bounds generated by the Bound Seeker for each combinatorial object.</p>
 </li>
 <li>
 <p>Run SICStus Prolog from a terminal (version 4.6.0 or a more recent version) with the following command to generate examples used in the comparison:<br>

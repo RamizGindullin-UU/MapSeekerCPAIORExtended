@@ -9,6 +9,7 @@
 %    implied.
 %
 :- use_module(library(lists)).
+:- use_module(library(statistics)).
 :- use_module(table_access).
 :- use_module(tables).
 :- use_module(utility).
@@ -214,10 +215,12 @@ create_stat(File) :-
      findall(Runtime,performance(_,_,KindCombiI,_MapI,_,_,Runtime),Runtimes),
      sumlist(Runtimes, TotalRuntime),
      length(Runtimes,  NTables),
-     TotalRuntimes is TotalRuntime div 1000,
-     AvgRuntime is TotalRuntimes div NTables,
+     TotalRuntimes is TotalRuntime / 1000,
+     (foreach(Runtime, Runtimes), foreach(RuntimeMs, RuntimesMs) do RuntimeMs is Runtime div 1000),  
+     population_standard_deviation(RuntimesMs, RuntimesDeviation),
+     AvgRuntime is TotalRuntimes / NTables,
      %write(KindCombiI-MapI), write(' ('), write(NTables), write('): '), write(TotalRuntimes), write('s / '), write(AvgRuntime), write('s.'), nl
-     write(KindCombiI), write(' ('), write(NTables), write('): '), write(TotalRuntimes), write('s / '), write(AvgRuntime), write('s.'), nl
+     write(KindCombiI), write(' ('), write(NTables), write('): '), write(TotalRuntimes), write('s / '), write(AvgRuntime), write('s / '), write(RuntimesDeviation), write('s.'), nl
     ),
     nl,nl,
     write('Per formula complexity:'),nl,
@@ -226,9 +229,11 @@ create_stat(File) :-
      findall(Runtime,performance(_,_,_,_,OplusI,NbTermsI,Runtime),Runtimes),
      sumlist(Runtimes, TotalRuntime),
      length(Runtimes,  NTables),
-     TotalRuntimes is TotalRuntime div 1000,
-     AvgRuntime is TotalRuntimes div NTables,
-     write(OplusI-NbTermsI), write(' ('), write(NTables), write('): '), write(TotalRuntimes), write('s / '), write(AvgRuntime), write('s.'), nl
+     TotalRuntimes is TotalRuntime / 1000,
+     (foreach(Runtime, Runtimes), foreach(RuntimeMs, RuntimesMs) do RuntimeMs is Runtime div 1000),  
+     population_standard_deviation(RuntimesMs, RuntimesDeviation),
+     AvgRuntime is TotalRuntimes / NTables,
+     write(OplusI-NbTermsI), write(' ('), write(NTables), write('): '), write(TotalRuntimes), write('s / '), write(AvgRuntime), write('s / '), write(RuntimesDeviation), write('s.'), nl
     ),
     nl,nl,nl,
     retractall(performance(_,_,_,_,_,_,_)).
